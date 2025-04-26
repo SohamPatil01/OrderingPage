@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  background: linear-gradient(to right, #ffe5ec, #fce1e4);
+  color: #333;
+}
+
+/* Header */
+header {
+  background: linear-gradient(to right, #f78fb3, #f8a5c2);
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation */
+nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  color: #f78fb3;
+  background: #fff;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+/* Main */
+main {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+main h2 {
+  font-size: 2rem;
+  color: #c44569;
+  margin-bottom: 20px;
+}
+
+main p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  width: 300px;
+  text-align: center;
+}
+
+.popup-content input {
+  width: 80%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.popup-content button {
+  margin-top: 15px;
+  background: #c44569;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart - Indian Spice</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #fffaf5;
+        animation: fadeIn 0.8s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      header {
+        background-color: #d62828;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      nav {
+        background-color: #f77f00;
+        text-align: center;
+        padding: 10px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+        color: #003049;
+      }
+
+      .cart-container {
+        max-width: 900px;
+        margin: 40px auto;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        animation: slideUp 1s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      h2 {
+        color: #d62828;
+        margin-bottom: 20px;
+      }
+
+      .cart-items {
+        list-style: none;
+        padding: 0;
+      }
+
+      .cart-items li {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .remove-btn {
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      .remove-btn:hover {
+        background-color: #d62828;
+      }
+
+      .total {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-top: 20px;
+        text-align: right;
+        color: #003049;
+      }
+
+      .place-order-btn {
+        display: block;
+        margin: 30px auto 0;
+        padding: 10px 30px;
+        background-color: #f77f00;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .place-order-btn:hover {
+        background-color: #d62828;
+      }
+
+      .confirmation {
+        display: none;
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        border-radius: 5px;
+        text-align: center;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Your Cart</h1>
+    </header>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="cart.html">Cart</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="cart-container">
+      <h2>Items in Your Cart</h2>
+      <ul class="cart-items" id="cart-items">
+        <!-- Dynamic items will be inserted here -->
+      </ul>
+      <div class="total" id="total">Total: ₹0</div>
+      <button class="place-order-btn" onclick="placeOrder()">
+        Place Order
+      </button>
+      <div class="confirmation" id="confirmation">
+        🎉 Your order has been placed successfully!
+      </div>
+    </div>
+
+    <script>
+      // Function to render the cart items
+      function renderCart() {
+        const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartList = document.getElementById("cart-items");
+        const totalEl = document.getElementById("total");
+
+        // Clear previous cart items
+        cartList.innerHTML = "";
+        let total = 0;
+
+        // Loop through cart items and render each one
+        cartItems.forEach((item, index) => {
+          const li = document.createElement("li");
+          li.innerHTML = `
+                <span>${item.name}</span>
+                <span>₹${item.price}</span>
+                <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+            `;
+          cartList.appendChild(li);
+          total += item.price;
+        });
+
+        // Update total price
+        totalEl.innerText = `Total: ₹${total}`;
+      }
+
+      // Function to remove an item from the cart
+      function removeItem(index) {
+        const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+        cartItems.splice(index, 1); // Remove the item from the array
+
+        // Save the updated cart back to localStorage
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+
+        renderCart(); // Re-render the cart after removal
+      }
+
+      // Function to place an order
+      function placeOrder() {
+        document.getElementById("confirmation").style.display = "block";
+        localStorage.removeItem("cart"); // Clear cart after order
+        setTimeout(() => {
+          window.location.href = "index.html"; // Redirect to home after 3 seconds
+        }, 3000);
+      }
+
+      renderCart(); // Call renderCart to show the current cart when the page loads
+    </script>
+  </body>
+</html>

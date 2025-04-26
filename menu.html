@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        animation: fadeInBody 1s ease-in;
+      }
+
+      @keyframes fadeInBody {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      header {
+        background-color: #343a40;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        animation: slideDown 0.6s ease-out;
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      nav a {
+        margin: 0 15px;
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      nav a:hover {
+        color: #ffc107;
+      }
+
+      .category-title {
+        font-size: 22px;
+        text-align: center;
+        margin: 20px auto;
+        cursor: pointer;
+        color: #333;
+        background-color: #e2e6ea;
+        padding: 12px 20px;
+        border-radius: 6px;
+        max-width: 300px;
+        transition: background-color 0.3s, transform 0.3s;
+        animation: fadeInCategory 0.5s ease-in-out;
+      }
+
+      .category-title:hover {
+        background-color: #ced4da;
+        transform: scale(1.05);
+      }
+
+      @keyframes fadeInCategory {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .menu-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+        display: none;
+        animation: fadeInItems 0.8s ease-in;
+      }
+
+      @keyframes fadeInItems {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .menu-item {
+        background-color: #ffffff;
+        border-radius: 10px;
+        margin: 15px;
+        padding: 20px;
+        width: 220px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .menu-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      .menu-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      .menu-item h3 {
+        margin-top: 10px;
+        font-size: 18px;
+        color: #333;
+      }
+
+      .menu-item p {
+        font-size: 16px;
+        color: #666;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Indian Restaurant Menu</h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="cart.html">Cart</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Categories -->
+      <div class="category-title" onclick="toggleCategory('appetizers')">
+        Appetizers
+      </div>
+      <div class="category-title" onclick="toggleCategory('mains')">
+        Main Courses
+      </div>
+      <div class="category-title" onclick="toggleCategory('desserts')">
+        Desserts
+      </div>
+      <div class="category-title" onclick="toggleCategory('beverages')">
+        Beverages
+      </div>
+
+      <!-- Appetizers -->
+      <div class="menu-container" id="appetizers">
+        <div class="menu-item">
+          <img src="images/pakora.jpg" alt="Pakora" />
+          <h3>Vegetable Pakora</h3>
+          <p>₹450</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('Vegetable Pakora', 450)">
+            Add to Cart
+          </button>
+        </div>
+        <div class="menu-item">
+          <img src="images/samosa.jpg" alt="Samosa" />
+          <h3>Samosa</h3>
+          <p>₹250</p>
+          <p>★★★★★</p>
+          <button onclick="addToCart('Samosa', 250)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/pakoda.jpg" alt="Pakoda" />
+          <h3>Onion Pakoda</h3>
+          <p>₹300</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('Onion Pakoda', 300)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/chaat.jpg" alt="Pani Puri" />
+          <h3>Pani Puri</h3>
+          <p>₹350</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('Pani Puri', 350)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/bhaji.jpg" alt="Bhaji" />
+          <h3>Pav Bhaji</h3>
+          <p>₹450</p>
+          <p>★★★★★</p>
+          <button onclick="addToCart('Pav Bhaji', 450)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/dhokla.jpg" alt="Dhokla" />
+          <h3>Dhokla</h3>
+          <p>₹350</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('Dhokla', 350)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/pakodi.jpg" alt="Methi Pakodi" />
+          <h3>Methi Pakodi</h3>
+          <p>₹400</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('Methi Pakodi', 400)">Add to Cart</button>
+        </div>
+      </div>
+
+      <!-- Main Courses -->
+      <div class="menu-container" id="mains">
+        <div class="menu-item">
+          <img src="images/biryani.jpg" alt="Biryani" />
+          <h3>Hyderabadi Biryani</h3>
+          <p>₹850</p>
+          <p>★★★★★</p>
+          <button onclick="addToCart('Hyderabadi Biryani', 850)">
+            Add to Cart
+          </button>
+        </div>
+        <div class="menu-item">
+          <img src="images/dal.jpg" alt="Dal Tadka" />
+          <h3>Dal Tadka</h3>
+          <p>₹400</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('Dal Tadka', 400)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/roti.jpg" alt="Roti" />
+          <h3>Butter Roti</h3>
+          <p>₹30</p>
+          <p>★★★★★</p>
+          <button onclick="addToCart('Butter Roti', 30)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/masala.jpg" alt="Paneer Masala" />
+          <h3>Paneer Masala</h3>
+          <p>₹600</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('Paneer Masala', 600)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/tikka.jpg" alt="Paneer Tikka" />
+          <h3>Paneer Tikka</h3>
+          <p>₹500</p>
+          <p>★★★★★</p>
+          <button onclick="addToCart('Paneer Tikka', 500)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/jalebi.jpg" alt="Jalebi" />
+          <h3>Jalebi</h3>
+          <p>₹250</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('Jalebi', 250)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/butterchicken.jpg" alt="Butter Chicken" />
+          <h3>Butter Chicken</h3>
+          <p>₹800</p>
+          <p>★★★★★</p>
+          <button onclick="addToCart('Butter Chicken', 800)">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+      <!-- Desserts (can add more items) -->
+      <div class="menu-container" id="desserts">
+        <!-- Add Dessert items here -->
+      </div>
+
+      <!-- Beverages (can add more items) -->
+      <div class="menu-container" id="beverages">
+        <!-- Add Beverages items here -->
+      </div>
+    </main>
+
+    <script>
+      function toggleCategory(categoryId) {
+        const allCategories = document.querySelectorAll(".menu-container");
+        allCategories.forEach((category) => {
+          if (category.id !== categoryId) {
+            category.style.display = "none";
+          }
+        });
+
+        const category = document.getElementById(categoryId);
+        category.style.display =
+          category.style.display === "none" || category.style.display === ""
+            ? "flex"
+            : "none";
+      }
+
+      function addToCart(itemName, itemPrice) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const existingItemIndex = cart.findIndex(
+          (item) => item.item === itemName
+        );
+        if (existingItemIndex > -1) {
+          cart[existingItemIndex].quantity++;
+        } else {
+          cart.push({ item: itemName, price: itemPrice, quantity: 1 });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+      function addToCart(name, price) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        const item = { name, price };
+        cart.push(item);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        alert(`${name} added to cart!`);
+      }
+    </script>
+  </body>
+</html>

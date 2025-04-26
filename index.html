@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Indian Spice</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #fff8f0;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      header {
+        background-color: #d62828;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        animation: slideIn 0.8s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(-30px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      nav {
+        background-color: #f77f00;
+        text-align: center;
+        padding: 10px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out;
+      }
+
+      nav a:hover {
+        text-decoration: underline;
+        color: #003049;
+      }
+
+      .banner {
+        background-image: url("images/restaurant-banner.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 2em;
+        font-weight: bold;
+        text-shadow: 2px 2px 5px #000;
+        position: relative;
+      }
+
+      .cta-button {
+        position: absolute;
+        bottom: 20px;
+        background-color: #f77f00;
+        padding: 10px 20px;
+        border: none;
+        color: white;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        animation: pulse 1.5s infinite;
+        text-decoration: none;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .content {
+        padding: 40px;
+        max-width: 900px;
+        margin: auto;
+        animation: fadeInUp 1s ease-in-out;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .recommendation,
+      .features,
+      .testimonials {
+        background-color: #fefae0;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 30px;
+      }
+
+      .recommendation h3,
+      .features h3,
+      .testimonials h3 {
+        color: #d62828;
+      }
+
+      .recommendation ul,
+      .features ul {
+        padding-left: 20px;
+      }
+
+      .testimonials p {
+        font-style: italic;
+        margin-bottom: 10px;
+      }
+
+      .testimonials strong {
+        display: block;
+        margin-top: 5px;
+        color: #003049;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to Indian Spice</h1>
+      <p>Authentic Indian Flavors Delivered to Your Door</p>
+    </header>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="cart.html">Cart</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="banner">
+      Deliciousness jumping into the mouth!
+      <a class="cta-button" href="menu.html">Order Now</a>
+    </div>
+
+    <div class="content">
+      <h2>About Our Restaurant</h2>
+      <p>
+        At Indian Spice, we serve the most delightful Indian dishes prepared
+        using traditional recipes and the finest ingredients. Our chefs bring
+        their passion and expertise to your plate, delivering a culinary
+        experience rich in flavor and culture. Whether you crave spicy curries,
+        fresh tandoori breads, or decadent sweets, we’ve got something for
+        everyone.
+      </p>
+
+      <p>
+        We are known for our warm hospitality, fast delivery, and a menu filled
+        with both classic and modern Indian delicacies. Join us to enjoy an
+        unforgettable meal!
+      </p>
+
+      <div class="features">
+        <h3>Why Choose Us?</h3>
+        <ul>
+          <li>🚚 Super Fast Delivery</li>
+          <li>👨‍🍳 Experienced Chefs</li>
+          <li>🌿 Fresh & Hygienic Ingredients</li>
+          <li>📱 Easy Online Ordering</li>
+          <li>⭐ Trusted by Thousands of Customers</li>
+        </ul>
+      </div>
+
+      <div class="recommendation">
+        <h3>Top Recommended Dishes</h3>
+        <ul>
+          <li>Butter Chicken</li>
+          <li>Paneer Tikka</li>
+          <li>Masala Dosa</li>
+          <li>Chicken Biryani</li>
+          <li>Chole Bhature</li>
+          <li>Rogan Josh</li>
+          <li>Gulab Jamun</li>
+        </ul>
+      </div>
+
+      <div class="testimonials">
+        <h3>What Our Customers Say</h3>
+        <p>
+          "The butter chicken was to die for! Tasted just like home. 👌"<br /><strong
+            >- Radhika S.</strong
+          >
+        </p>
+        <p>
+          "Fast delivery and hot food. Loved the Paneer Tikka!"<br /><strong
+            >- Arjun M.</strong
+          >
+        </p>
+        <p>
+          "My favorite spot for biryani nights. ❤️ Highly recommended!"<br /><strong
+            >- Neha D.</strong
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
