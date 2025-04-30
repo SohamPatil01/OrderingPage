@@ -17,5 +17,13 @@
     "nodemailer": "^6.10.1",
     "twilio": "^5.5.2"
   },
-  "description": ""
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SohamPatil01/Hotelorderpage.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SohamPatil01/Hotelorderpage/issues"
+  },
+  "homepage": "https://github.com/SohamPatil01/Hotelorderpage#readme"
 }

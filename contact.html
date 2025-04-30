@@ -3,141 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Us - Indian Spice</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <title>Contact Us</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       body {
-        font-family: Arial, sans-serif;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
         margin: 0;
         padding: 0;
-        background-color: #fffaf5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
       }
 
-      header {
-        background-color: #d62828;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
-
-      nav {
-        background-color: #f77f00;
-        text-align: center;
-        padding: 10px;
-      }
-
-      nav a {
-        color: white;
-        text-decoration: none;
-        margin: 0 15px;
-        font-weight: bold;
-      }
-
-      nav a:hover {
-        text-decoration: underline;
-      }
-
-      .contact-container {
-        max-width: 600px;
-        margin: 40px auto;
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .contact-container h2 {
-        margin-bottom: 20px;
-        color: #d62828;
-      }
-
-      .contact-container label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-
-      .contact-container input,
-      .contact-container textarea {
+      .container {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        max-width: 500px;
+        box-sizing: border-box;
       }
 
-      .contact-container button {
-        background-color: #f77f00;
+      h1 {
+        text-align: center;
+        color: #d62828;
+        margin-bottom: 30px;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: 500;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        font-size: 16px;
+        background: #f9f9f9;
+        transition: 0.3s;
+      }
+
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #d62828;
+        background: #fff;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      button {
+        background-color: #d62828;
         color: white;
         border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
+        padding: 12px;
+        width: 100%;
+        font-size: 16px;
+        border-radius: 10px;
         cursor: pointer;
+        margin-top: 20px;
+        transition: background 0.3s;
       }
 
-      .contact-container button:hover {
-        background-color: #d62828;
+      button:hover {
+        background-color: #a71d1d;
+      }
+
+      .success,
+      .error {
+        margin-top: 15px;
+        text-align: center;
+        font-weight: 500;
+      }
+
+      .success {
+        color: green;
+      }
+
+      .error {
+        color: red;
       }
     </style>
   </head>
   <body>
-    <header>
+    <div class="container">
       <h1>Contact Us</h1>
-    </header>
-
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="cart.html">Cart</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-
-    <div class="contact-container">
-      <h2>Send Us a Message</h2>
       <form id="contactForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required />
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="e.g., John Doe" required />
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
+        <label for="email">Your Email</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="e.g., john@example.com"
+          required
+        />
 
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+        <label for="message">Your Message</label>
+        <textarea
+          id="message"
+          rows="5"
+          placeholder="Type your message..."
+          required
+        ></textarea>
 
-        <button type="submit">Send</button>
+        <button type="submit">Send Message</button>
+        <div id="responseMsg" class=""></div>
       </form>
-      <p id="responseMsg" style="margin-top: 10px; color: green"></p>
     </div>
 
     <script>
-      document
-        .getElementById("contactForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+      const form = document.getElementById("contactForm");
+      const responseMsg = document.getElementById("responseMsg");
 
-          const name = document.getElementById("name").value;
-          const email = document.getElementById("email").value;
-          const message = document.getElementById("message").value;
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-          fetch("http://localhost:3000/send-email", {
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        responseMsg.textContent = "Sending...";
+        responseMsg.className = "";
+
+        try {
+          const res = await fetch("http://localhost:3000/send-email", {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, message }),
-          })
-            .then((res) => res.text())
-            .then((response) => {
-              document.getElementById("responseMsg").textContent =
-                "Message sent successfully!";
-              document.getElementById("contactForm").reset();
-            })
-            .catch((error) => {
-              console.error("Error:", error);
-              document.getElementById("responseMsg").textContent =
-                "Error sending message.";
-            });
-        });
+          });
+
+          const result = await res.text();
+          responseMsg.textContent = result;
+          responseMsg.className = res.ok ? "success" : "error";
+          if (res.ok) form.reset();
+        } catch (err) {
+          responseMsg.textContent = "Something went wrong!";
+          responseMsg.className = "error";
+        }
+      });
     </script>
   </body>
 </html>
