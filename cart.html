@@ -8,19 +8,9 @@
     <style>
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #fffaf5;
         margin: 0;
         padding: 0;
-        background-color: #fffaf5;
-        animation: fadeIn 0.8s ease-in-out;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
       }
 
       header {
@@ -28,6 +18,7 @@
         color: white;
         padding: 20px;
         text-align: center;
+        font-size: 1.8rem;
       }
 
       nav {
@@ -51,27 +42,16 @@
       .cart-container {
         max-width: 900px;
         margin: 40px auto;
-        background-color: #fff;
+        background-color: #ffffff;
         padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        animation: slideUp 1s ease-out;
-      }
-
-      @keyframes slideUp {
-        from {
-          transform: translateY(30px);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       }
 
       h2 {
         color: #d62828;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
+        text-align: center;
       }
 
       .cart-items {
@@ -82,8 +62,22 @@
       .cart-items li {
         display: flex;
         justify-content: space-between;
-        padding: 10px 0;
+        align-items: center;
+        padding: 15px 10px;
         border-bottom: 1px solid #eee;
+        font-size: 1.1rem;
+      }
+
+      .item-name {
+        flex: 2;
+      }
+      .item-qty {
+        flex: 1;
+        text-align: center;
+      }
+      .item-price {
+        flex: 1;
+        text-align: right;
       }
 
       .remove-btn {
@@ -93,47 +87,36 @@
         padding: 5px 10px;
         cursor: pointer;
         border-radius: 5px;
+        margin-left: 10px;
       }
 
       .remove-btn:hover {
-        background-color: #d62828;
+        background-color: #c82333;
       }
 
       .total {
-        font-size: 1.2em;
+        text-align: right;
+        font-size: 1.2rem;
         font-weight: bold;
         margin-top: 20px;
-        text-align: right;
         color: #003049;
       }
 
       .place-order-btn {
         display: block;
         margin: 30px auto 0;
-        padding: 10px 30px;
+        padding: 12px 30px;
         background-color: #f77f00;
         border: none;
-        border-radius: 5px;
+        border-radius: 8px;
         color: white;
-        font-size: 1rem;
+        font-size: 1.1rem;
         cursor: pointer;
         transition: background-color 0.3s ease;
       }
 
       .place-order-btn:hover {
         background-color: #d62828;
-      }
-
-      .confirmation {
-        display: none;
-        margin-top: 20px;
-        padding: 15px;
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-        border-radius: 5px;
-        text-align: center;
-        animation: fadeIn 0.5s ease-in-out;
       }
     </style>
   </head>
@@ -152,65 +135,64 @@
     <div class="cart-container">
       <h2>Items in Your Cart</h2>
       <ul class="cart-items" id="cart-items">
-        <!-- Dynamic items will be inserted here -->
+        <!-- Cart items go here -->
       </ul>
       <div class="total" id="total">Total: ₹0</div>
       <button class="place-order-btn" onclick="placeOrder()">
         Place Order
       </button>
-      <div class="confirmation" id="confirmation">
-        🎉 Your order has been placed successfully!
-      </div>
     </div>
 
     <script>
-      // Function to render the cart items
       function renderCart() {
         const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
         const cartList = document.getElementById("cart-items");
         const totalEl = document.getElementById("total");
-
-        // Clear previous cart items
         cartList.innerHTML = "";
-        let total = 0;
 
-        // Loop through cart items and render each one
-        cartItems.forEach((item, index) => {
+        const grouped = {};
+        cartItems.forEach((item) => {
+          if (!grouped[item.name]) {
+            grouped[item.name] = { ...item, qty: 1 };
+          } else {
+            grouped[item.name].qty++;
+            grouped[item.name].price += item.price;
+          }
+        });
+
+        let total = 0;
+        Object.values(grouped).forEach((item, index) => {
           const li = document.createElement("li");
           li.innerHTML = `
-                <span>${item.name}</span>
-                <span>₹${item.price}</span>
-                <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
-            `;
+            <span class="item-name">${item.name}</span>
+            <span class="item-qty">Qty: ${item.qty}</span>
+            <span class="item-price">₹${item.price}</span>
+            <button class="remove-btn" onclick="removeItem('${item.name}')">Remove</button>
+          `;
           cartList.appendChild(li);
           total += item.price;
         });
 
-        // Update total price
         totalEl.innerText = `Total: ₹${total}`;
       }
 
-      // Function to remove an item from the cart
-      function removeItem(index) {
-        const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-        cartItems.splice(index, 1); // Remove the item from the array
-
-        // Save the updated cart back to localStorage
+      function removeItem(name) {
+        let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+        const index = cartItems.findIndex((item) => item.name === name);
+        if (index > -1) {
+          cartItems.splice(index, 1);
+        }
         localStorage.setItem("cart", JSON.stringify(cartItems));
-
-        renderCart(); // Re-render the cart after removal
+        renderCart();
       }
 
-      // Function to place an order
       function placeOrder() {
-        document.getElementById("confirmation").style.display = "block";
-        localStorage.removeItem("cart"); // Clear cart after order
-        setTimeout(() => {
-          window.location.href = "index.html"; // Redirect to home after 3 seconds
-        }, 3000);
+        alert("Your order has been placed!");
+        localStorage.removeItem("cart");
+        renderCart();
       }
 
-      renderCart(); // Call renderCart to show the current cart when the page loads
+      renderCart();
     </script>
   </body>
 </html>

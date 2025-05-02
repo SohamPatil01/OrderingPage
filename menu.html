@@ -148,6 +148,40 @@
         background-color: #0056b3;
         transform: scale(1.05);
       }
+      .add-notification {
+        position: absolute;
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.9rem;
+        animation: fadeOut 2s forwards;
+        opacity: 0;
+        pointer-events: none;
+        top: -25px;
+        left: 0;
+        z-index: 10;
+      }
+
+      @keyframes fadeOut {
+        0% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        80% {
+          opacity: 1;
+          transform: translateY(-5px);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+      }
+
+      .menu-item {
+        position: relative;
+      }
     </style>
   </head>
   <body>
@@ -189,28 +223,28 @@
           </button>
         </div>
         <div class="menu-item">
-          <img src="images/samosa.jpg" alt="Samosa" />
+          <img src="images/samosa-recipe.jpg" alt="Samosa" />
           <h3>Samosa</h3>
           <p>₹250</p>
           <p>★★★★★</p>
           <button onclick="addToCart('Samosa', 250)">Add to Cart</button>
         </div>
         <div class="menu-item">
-          <img src="images/pakoda.jpg" alt="Pakoda" />
+          <img src="images/onion-pakoda.jpg" alt="Pakoda" />
           <h3>Onion Pakoda</h3>
           <p>₹300</p>
           <p>★★★★☆</p>
           <button onclick="addToCart('Onion Pakoda', 300)">Add to Cart</button>
         </div>
         <div class="menu-item">
-          <img src="images/chaat.jpg" alt="Pani Puri" />
+          <img src="images/pani-puri.jpg" alt="Pani Puri" />
           <h3>Pani Puri</h3>
           <p>₹350</p>
           <p>★★★★☆</p>
           <button onclick="addToCart('Pani Puri', 350)">Add to Cart</button>
         </div>
         <div class="menu-item">
-          <img src="images/bhaji.jpg" alt="Bhaji" />
+          <img src="images/pav-bhaji.jpg" alt="Bhaji" />
           <h3>Pav Bhaji</h3>
           <p>₹450</p>
           <p>★★★★★</p>
@@ -222,13 +256,6 @@
           <p>₹350</p>
           <p>★★★★☆</p>
           <button onclick="addToCart('Dhokla', 350)">Add to Cart</button>
-        </div>
-        <div class="menu-item">
-          <img src="images/pakodi.jpg" alt="Methi Pakodi" />
-          <h3>Methi Pakodi</h3>
-          <p>₹400</p>
-          <p>★★★★☆</p>
-          <button onclick="addToCart('Methi Pakodi', 400)">Add to Cart</button>
         </div>
       </div>
 
@@ -271,13 +298,7 @@
           <p>★★★★★</p>
           <button onclick="addToCart('Paneer Tikka', 500)">Add to Cart</button>
         </div>
-        <div class="menu-item">
-          <img src="images/jalebi.jpg" alt="Jalebi" />
-          <h3>Jalebi</h3>
-          <p>₹250</p>
-          <p>★★★★☆</p>
-          <button onclick="addToCart('Jalebi', 250)">Add to Cart</button>
-        </div>
+
         <div class="menu-item">
           <img src="images/butterchicken.jpg" alt="Butter Chicken" />
           <h3>Butter Chicken</h3>
@@ -291,12 +312,59 @@
 
       <!-- Desserts (can add more items) -->
       <div class="menu-container" id="desserts">
-        <!-- Add Dessert items here -->
+        <div class="menu-item">
+          <img src="images/Rabdi.jpg" alt="Rabdi" />
+          <h3>Rabdi</h3>
+          <p>₹150</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('Rabdi', 150)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/gulab-jamun.jpg" alt="GulabJamun" />
+          <h3>GulabJamun</h3>
+          <p>₹50</p>
+          <p>★★★★★</p>
+          <button onclick="addToCart('GulabJamun', 50)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/pastry.jpg" alt="Pastry" />
+          <h3>Pastry</h3>
+          <p>₹180</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('Pastry', 180)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/jalebi.jpg" alt="Jalebi" />
+          <h3>Jalebi</h3>
+          <p>₹250</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('Jalebi', 250)">Add to Cart</button>
+        </div>
       </div>
 
       <!-- Beverages (can add more items) -->
       <div class="menu-container" id="beverages">
-        <!-- Add Beverages items here -->
+        <div class="menu-item">
+          <img src="images/cold-coffee.jpg" alt="ColdCoffee" />
+          <h3>ColdCoffee</h3>
+          <p>₹80</p>
+          <p>★★★★★</p>
+          <button onclick="addToCart('ColdCoffee', 80)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/iced-mocha.jpg" alt="IcedMocha" />
+          <h3>IcedMocha</h3>
+          <p>₹130</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('IcedMocha', 130)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+          <img src="images/lemon-iced-tea.jpg" alt="LemonIcedTea" />
+          <h3>LemonIcedTea</h3>
+          <p>₹150</p>
+          <p>★★★★☆</p>
+          <button onclick="addToCart('LemonIcedTea', 150)">Add to Cart</button>
+        </div>
       </div>
     </main>
 
